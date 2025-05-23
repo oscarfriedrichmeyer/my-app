@@ -5,19 +5,21 @@ import Image from "next/image";
 
 export default function Home() {
   const [showLogin, setShowLogin] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/user", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
       });
 
       const data = await response.json();
@@ -40,7 +42,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: registerEmail, password: registerPassword }),
       });
 
       const data = await response.json();
@@ -72,23 +74,23 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-gray-700">Login</h2>
           <form onSubmit={handleLogin} className="mt-4">
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-600 mb-2">Email</label>
+              <label htmlFor="login-email" className="block text-gray-600 mb-2">Email</label>
               <input
                 type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="login-email"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-gray-600 mb-2">Password</label>
+              <label htmlFor="login-password" className="block text-gray-600 mb-2">Password</label>
               <input
                 type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                id="login-password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
                 required
               />
@@ -107,8 +109,8 @@ export default function Home() {
               <input
                 type="email"
                 id="register-email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={registerEmail}
+                onChange={(e) => setRegisterEmail(e.target.value)}
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
                 required
               />
@@ -118,8 +120,8 @@ export default function Home() {
               <input
                 type="password"
                 id="register-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={registerPassword}
+                onChange={(e) => setRegisterPassword(e.target.value)}
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-blue-300"
                 required
               />
