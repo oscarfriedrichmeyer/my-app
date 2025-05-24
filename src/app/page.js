@@ -89,11 +89,11 @@ export default function Home() {
           {/* Navigation and Fun Images */}
           <div className="w-full flex flex-row justify-between items-end mt-8 px-8">
             <div className="flex flex-col items-center">
-              <Image src="/girl-milkshake.png" alt="Jobs at Sugar" width={100} height={100} className="rotate-[-10deg] rounded-xl mb-2" />
+              <Image src="/IMG_7501.jpeg" alt="Jobs at Sugar" width={100} height={100} className="rotate-[-10deg] rounded-xl mb-2" />
               <span className="font-mono text-lg md:text-xl tracking-widest mt-2 underline decoration-2 decoration-black text-black">JOBS AT SUGAR</span>
             </div>
             <div className="flex flex-col items-center">
-              <Image src="/dog-yoga.png" alt="WTF is Sugar" width={120} height={80} className="rotate-[8deg] rounded-xl mb-2" />
+              <Image src="/IMG_0303.jpeg" alt="WTF is Sugar" width={120} height={80} className="rotate-[8deg] rounded-xl mb-2" />
               <span className="font-mono text-lg md:text-xl tracking-widest mt-2 underline decoration-2 decoration-black text-black">WTF IS SUGAR</span>
             </div>
           </div>
