@@ -83,12 +83,23 @@ export default function Home() {
     }
   };
 
-  const sortedConfessions = [...confessions].sort((a, b) => {
-    if (filter === 'most-liked') {
-      return (b.likes || 0) - (a.likes || 0);
-    }
-    return new Date(b.date) - new Date(a.date);
-  });
+  let sortedConfessions = [...confessions];
+  if (filter === 'most-liked') {
+    sortedConfessions.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+  } else if (filter === 'hot') {
+    // Reddit-style hot algorithm: score = likes / (hours since post + 2)^1.5
+    sortedConfessions.sort((a, b) => {
+      const now = Date.now();
+      const score = (c) => {
+        const likes = c.likes || 0;
+        const hours = Math.max((now - new Date(c.date).getTime()) / 36e5, 0.01);
+        return likes / Math.pow(hours + 2, 1.5);
+      };
+      return score(b) - score(a);
+    });
+  } else {
+    sortedConfessions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
 
   return (
     <>
@@ -127,7 +138,10 @@ export default function Home() {
         {/* Confession Card Section */}
         <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[180px] mb-8 p-8 bg-white rounded-3xl shadow-2xl border-2 border-gray-200 backdrop-blur-md">
           <h1 className="text-4xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
-          <p className="text-center text-gray-700 mb-6 font-mono">Share your fitness sins and guilty pleasures. No judgment, just joy!</p>
+          <p className="text-center text-gray-700 mb-6 font-mono">
+            Share your fitness sins and guilty pleasures. No judgment, just joy!<br />
+            <span className="block mt-2 text-pink-700 font-bold">The three most-liked submissions will each receive a 300€ voucher for events on the Sugar platform – for you and your friends!</span>
+          </p>
           <form onSubmit={handleSubmit} className="mb-6">
             <div className="mb-4">
               <label htmlFor="confession" className="block text-black text-lg font-semibold mb-2 font-mono">Your Confession or Guilty Pleasure</label>
@@ -149,7 +163,7 @@ export default function Home() {
             </div>
             <div className="mb-4">
               <label className="block text-black font-semibold mb-1 font-mono">Optional: Upload an image</label>
-              <button type="button" onClick={() => inputImageRef.current && inputImageRef.current.click()} className="px-4 py-2 bg-black text-white font-mono rounded-lg shadow hover:bg-gray-900 transition">Bild hochladen</button>
+              <button type="button" onClick={() => inputImageRef.current && inputImageRef.current.click()} className="px-4 py-2 bg-black text-white font-mono rounded-lg shadow hover:bg-gray-900 transition">Upload image</button>
               <input type="file" accept="image/*" ref={inputImageRef} onChange={handleImageChange} className="hidden" />
             </div>
             <button type="submit" className="w-full px-6 py-3 bg-black text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-gray-900 transition font-mono">Share My Confession 🍭</button>
@@ -200,6 +214,7 @@ export default function Home() {
           <div className="flex justify-center gap-4 mb-6">
             <button onClick={() => setFilter('newest')} className={`px-5 py-2 rounded-full text-lg font-semibold shadow font-mono border-2 border-black ${filter === 'newest' ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-200'}`}>Newest</button>
             <button onClick={() => setFilter('most-liked')} className={`px-5 py-2 rounded-full text-lg font-semibold shadow font-mono border-2 border-black ${filter === 'most-liked' ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-200'}`}>Most Liked</button>
+            <button onClick={() => setFilter('hot')} className={`px-5 py-2 rounded-full text-lg font-semibold shadow font-mono border-2 border-black ${filter === 'hot' ? 'bg-black text-white' : 'bg-white text-black hover:bg-gray-200'}`}>Hot</button>
           </div>
           <h2 className="text-2xl font-bold text-black mb-4 text-center font-sans">Recent Confessions</h2>
           {loading ? <p className="text-center text-blue-400 text-lg font-mono">Loading the sweetness...</p> : null}
