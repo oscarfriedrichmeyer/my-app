@@ -93,6 +93,20 @@ export default function Home() {
   return (
     <>
       <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/grid-bg.png')] bg-repeat bg-[#f7f7f7] overflow-x-hidden">
+        {/* Side navigation links with images - fixed at medium height */}
+        <div className="fixed top-1/2 left-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pl-2">
+          <div className="flex flex-col items-center">
+            <img src="/IMG_0303.jpeg" alt="Funny Jobs" className="w-28 h-28 md:w-36 md:h-36 sugar-side-img mb-2" />
+            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="sugar-side-link text-lg md:text-2xl px-4 py-2 rounded-xl font-mono">JOBS AT SUGAR</a>
+          </div>
+        </div>
+        <div className="fixed top-1/2 right-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pr-2">
+          <div className="flex flex-col items-center">
+            <img src="/IMG_7501.jpeg" alt="Funny About" className="w-28 h-28 md:w-36 md:h-36 sugar-side-img mb-2" />
+            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="sugar-side-link text-lg md:text-2xl px-4 py-2 rounded-xl font-mono">WTF IS SUGAR</a>
+          </div>
+        </div>
+
         {/* Hero Section: Centered Logo with Glow */}
         <div className="absolute top-0 left-0 w-full flex flex-col items-center z-10 pt-0">
           <div className="relative flex flex-col items-center">
@@ -147,7 +161,7 @@ export default function Home() {
                 href="https://apps.apple.com/de/app/sugar-do-stuff-together/id6468963352?l=en-GB"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold font-mono text-lg px-8 py-4 rounded-2xl shadow-lg border-2 border-blue-800 transition focus:outline-none focus:ring-4 focus:ring-blue-300"
+                className="sugar-appstore-btn inline-flex items-center gap-3 text-lg px-8 py-4 font-mono"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M17.564 13.233c-.024-2.568 2.1-3.792 2.19-3.849-1.194-1.74-3.05-1.98-3.705-2.004-1.578-.162-3.084.927-3.885.927-.798 0-2.016-.903-3.318-.879-1.71.024-3.294.99-4.176 2.511-1.788 3.099-.456 7.687 1.278 10.207.846 1.215 1.854 2.577 3.174 2.527 1.278-.048 1.755-.819 3.294-.819 1.536 0 1.962.819 3.318.795 1.38-.024 2.244-1.239 3.084-2.454.978-1.416 1.38-2.793 1.404-2.862-.03-.012-2.682-1.029-2.706-4.003zm-3.09-7.29c.705-.855 1.185-2.049 1.053-3.243-1.02.042-2.25.678-2.985 1.533-.654.75-1.23 1.962-1.014 3.12 1.14.09 2.322-.582 2.946-1.41z"/></svg>
                 <span>Get Sugar for iOS</span>

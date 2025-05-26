@@ -18,4 +18,51 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  /* Subtle grid background using gradients */
+  background-color: #f7f7fa;
+  background-image:
+    linear-gradient(90deg, rgba(230,230,255,0.25) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(230,230,255,0.25) 1px, transparent 1px),
+    linear-gradient(135deg, #e9e6f7 0%, #f7e9e9 100%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0;
+  background-repeat: repeat, repeat, no-repeat;
+}
+
+/* Side nav images: softer frames, subtle shadow */
+.sugar-side-img {
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #f7e9e9;
+  box-shadow: 0 4px 24px 0 rgba(200,180,255,0.10);
+  background: linear-gradient(135deg, #e9e6f7 60%, #f7e9e9 100%);
+}
+
+.sugar-side-link {
+  background: linear-gradient(90deg, #e9e6f7 60%, #f7e9e9 100%);
+  color: #7b8cff;
+  border: none;
+  font-weight: 800;
+  box-shadow: 0 2px 12px 0 rgba(123,140,255,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+.sugar-side-link:hover {
+  background: linear-gradient(90deg, #f7e9e9 60%, #e9e6f7 100%);
+  color: #e97bff;
+}
+
+/* App Store button: gradient, bolder, rounded */
+.sugar-appstore-btn {
+  background: linear-gradient(90deg, #7b8cff 0%, #e97bff 100%);
+  color: #fff;
+  border: none;
+  font-weight: 900;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px 0 rgba(123,140,255,0.15);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.sugar-appstore-btn:hover {
+  background: linear-gradient(90deg, #e97bff 0%, #7b8cff 100%);
+  box-shadow: 0 8px 32px 0 rgba(233,123,255,0.18);
 }
