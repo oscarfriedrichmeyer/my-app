@@ -16,10 +16,10 @@ export async function GET() {
 
 export async function POST(req) {
   try {
-    const { name, age, city, confession } = await req.json();
+    const { name, age, city, confession, image } = await req.json();
     const result = await pool.query(
-      'INSERT INTO confessions (name, age, city, confession, date, likes) VALUES ($1, $2, $3, $4, NOW(), 0) RETURNING *',
-      [name, age, city, confession]
+      'INSERT INTO confessions (name, age, city, confession, image, date, likes) VALUES ($1, $2, $3, $4, $5, NOW(), 0) RETURNING *',
+      [name, age, city, confession, image]
     );
     return NextResponse.json({ confession: result.rows[0] });
   } catch (err) {
