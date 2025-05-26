@@ -93,17 +93,17 @@ export default function Home() {
   return (
     <>
       <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/grid-bg.png')] bg-repeat bg-[#f7f7f7] overflow-x-hidden">
-        {/* Side navigation links with images - fixed at medium height */}
+        {/* Side navigation links with images - fixed at medium height, cutout style, underlined text */}
         <div className="fixed top-1/2 left-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pl-2">
           <div className="flex flex-col items-center">
-            <img src="/IMG_0303.jpeg" alt="Funny Jobs" className="w-28 h-28 md:w-36 md:h-36 sugar-side-img mb-2" />
-            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="sugar-side-link text-lg md:text-2xl px-4 py-2 rounded-xl font-mono">JOBS AT SUGAR</a>
+            <img src="/cat-monitor.jpg" alt="Funny Jobs" className="w-36 h-36 md:w-44 md:h-44 object-contain mb-2 bg-transparent" style={{background: 'transparent', boxShadow: 'none', border: 'none'}} />
+            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="font-mono text-black text-xl md:text-3xl tracking-wider mt-2" style={{textDecoration: 'underline', textUnderlineOffset: '6px', textDecorationThickness: '3px', letterSpacing: '0.08em'}}>JOBS AT SUGAR</a>
           </div>
         </div>
         <div className="fixed top-1/2 right-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pr-2">
           <div className="flex flex-col items-center">
-            <img src="/IMG_7501.jpeg" alt="Funny About" className="w-28 h-28 md:w-36 md:h-36 sugar-side-img mb-2" />
-            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="sugar-side-link text-lg md:text-2xl px-4 py-2 rounded-xl font-mono">WTF IS SUGAR</a>
+            <img src="/double-head.jpg" alt="Funny About" className="w-36 h-36 md:w-44 md:h-44 object-contain mb-2 bg-transparent" style={{background: 'transparent', boxShadow: 'none', border: 'none'}} />
+            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="font-mono text-black text-xl md:text-3xl tracking-wider mt-2" style={{textDecoration: 'underline', textUnderlineOffset: '6px', textDecorationThickness: '3px', letterSpacing: '0.08em'}}>WTF IS SUGAR</a>
           </div>
         </div>
 
