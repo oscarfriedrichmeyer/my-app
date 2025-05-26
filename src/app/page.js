@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -15,6 +15,8 @@ export default function Home() {
     }
     return [];
   });
+  const [image, setImage] = useState(null);
+  const inputImageRef = useRef(null);
 
   useEffect(() => {
     fetchConfessions();
@@ -42,14 +44,17 @@ export default function Home() {
       setMessage('Please fill in all fields.');
       return;
     }
+    const submission = { ...form };
+    if (image) submission.image = image;
     const res = await fetch('/api/confession', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify(submission),
     });
     if (res.ok) {
       setMessage('Thank you for your confession!');
       setForm({ name: '', age: '', city: '', confession: '' });
+      setImage(null);
       fetchConfessions();
     } else {
       setMessage('Failed to submit confession.');
@@ -65,6 +70,17 @@ export default function Home() {
     });
     setLikedIds([...likedIds, id]);
     fetchConfessions();
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImage(event.target && event.target.result ? event.target.result : null);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const sortedConfessions = [...confessions].sort((a, b) => {
@@ -86,25 +102,11 @@ export default function Home() {
               <span className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white px-6 py-2 rounded-xl text-4xl font-sans font-bold shadow-lg border-2 border-black rotate-[-6deg] z-20" style={{fontFamily: 'serif'}}>Sugar</span>
             </div>
           </div>
-          {/* Navigation and Fun Images */}
-          <div className="w-full flex flex-row justify-between items-end mt-8 px-8">
-            <div className="flex flex-col items-center">
-              <Image src="/IMG_7501.jpeg" alt="Jobs at Sugar" width={100} height={100} className="rotate-[-10deg] rounded-xl mb-2" />
-              <span className="font-mono text-lg md:text-xl tracking-widest mt-2 underline decoration-2 decoration-black text-black">JOBS AT SUGAR</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Image src="/IMG_0303.jpeg" alt="WTF is Sugar" width={120} height={80} className="rotate-[8deg] rounded-xl mb-2" />
-              <span className="font-mono text-lg md:text-xl tracking-widest mt-2 underline decoration-2 decoration-black text-black">WTF IS SUGAR</span>
-            </div>
-          </div>
-          {/* Main CTA Button */}
-          <div className="w-full flex justify-center mt-8 mb-2">
-            <button className="bg-black text-white font-mono text-2xl px-12 py-4 rounded-lg shadow-xl tracking-widest hover:bg-gray-900 transition">SIGN UP TO SUGAR</button>
-          </div>
         </div>
+
         {/* Confession Card Section */}
-        <div className="relative z-20 w-full max-w-2xl mx-auto mt-[420px] md:mt-[480px] mb-8 p-8 bg-white rounded-3xl shadow-2xl border-2 border-gray-200 backdrop-blur-md">
-          <h1 className="text-4xl font-extrabold text-center mb-2 font-sans text-black">Sugar Confessions</h1>
+        <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[180px] mb-8 p-8 bg-white rounded-3xl shadow-2xl border-2 border-gray-200 backdrop-blur-md">
+          <h1 className="text-4xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
           <p className="text-center text-gray-700 mb-6 font-mono">Share your fitness confessions and guilty pleasures. No judgment, just joy!</p>
           <form onSubmit={handleSubmit} className="mb-6">
             <div className="mb-4">
@@ -124,6 +126,17 @@ export default function Home() {
                 <label htmlFor="city" className="block text-black font-semibold mb-1 font-mono">City</label>
                 <input type="text" id="city" name="city" value={form.city} onChange={handleChange} className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-300 bg-gray-50 text-gray-800 font-mono" placeholder="Your city" />
               </div>
+            </div>
+            <div className="mb-4">
+              <label className="block text-black font-semibold mb-1 font-mono">Optional: Upload an image</label>
+              <button type="button" onClick={() => inputImageRef.current && inputImageRef.current.click()} className="px-4 py-2 bg-black text-white font-mono rounded-lg shadow hover:bg-gray-900 transition">Bild hochladen</button>
+              <input type="file" accept="image/*" ref={inputImageRef} onChange={handleImageChange} className="hidden" />
+              {image && (
+                <div className="mt-2 w-32 h-32 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={image} alt="Upload Preview" className="rounded-xl object-contain w-full h-full border-2 border-black" />
+                </div>
+              )}
             </div>
             <button type="submit" className="w-full px-6 py-3 bg-black text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-gray-900 transition font-mono">Share My Confession 🍭</button>
             {message && <p className="mt-4 text-center text-green-600 text-lg font-semibold font-mono">{message}</p>}
