@@ -201,16 +201,26 @@ export default function Home() {
 
           {/* Image Preview Section - below form, clickable, lighter border */}
           {image && (
-            <div className="flex justify-center mb-6">
-              <a href={image} target="_blank" rel="noopener noreferrer" title="View full size">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={image}
-                  alt="Upload Preview"
-                  className="rounded-2xl object-cover w-48 h-48 border-2 border-pink-200 bg-white/70 shadow transition-transform hover:scale-105 hover:border-pink-400 cursor-pointer"
-                  style={{ maxHeight: '180px', maxWidth: '180px' }}
-                />
-              </a>
+            <div className="flex flex-col items-center mb-6">
+              <div className="relative group">
+                <a href={image} target="_blank" rel="noopener noreferrer" title="View full size">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={image}
+                    alt="Upload Preview"
+                    className="rounded-2xl object-cover w-44 h-44 md:w-56 md:h-56 border-2 border-pink-200 bg-white/70 shadow transition-transform duration-200 group-hover:scale-105 group-hover:border-pink-400 cursor-pointer"
+                    style={{ maxHeight: '224px', maxWidth: '224px', aspectRatio: '1/1', objectFit: 'cover' }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                    <span className="text-white font-mono text-sm">Click to view full size</span>
+                  </div>
+                </a>
+              </div>
+              <button
+                type="button"
+                className="mt-2 text-xs text-gray-500 underline hover:text-pink-500 font-mono"
+                onClick={() => { setImage(null); if(inputImageRef.current) inputImageRef.current.value = ''; }}
+              >Remove image</button>
             </div>
           )}
 
