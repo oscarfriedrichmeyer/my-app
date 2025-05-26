@@ -167,6 +167,19 @@ export default function Home() {
                 <span>Get Sugar for iOS</span>
               </a>
             </div>
+
+            {/* Link your Instagram Button */}
+            <div className="flex justify-center mt-4">
+              <a
+                href="https://api.instagram.com/oauth/authorize?client_id=YOUR_INSTAGRAM_CLIENT_ID&redirect_uri=https://your-sugar-app.com/api/instagram/callback&scope=user_profile,user_media&response_type=code"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 via-red-400 to-yellow-400 text-white font-bold font-mono text-lg rounded-2xl shadow-lg hover:from-pink-600 hover:to-yellow-500 transition"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.5A5.25 5.25 0 017.5 2.25h9A5.25 5.25 0 0121.75 7.5v9a5.25 5.25 0 01-5.25 5.25h-9A5.25 5.25 0 012.25 16.5v-9z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 11.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75h.008v.008h-.008V6.75z" /></svg>
+                Link your Instagram
+              </a>
+            </div>
           </form>
 
           {/* Image Preview Section - moved below form, clickable */}
