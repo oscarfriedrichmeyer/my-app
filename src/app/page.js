@@ -94,8 +94,14 @@ export default function Home() {
     <>
       <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/grid-bg.png')] bg-repeat bg-[#f7f7f7] overflow-x-hidden">
         {/* Hero Section: Centered Logo with Glow */}
-        <div className="absolute top-0 left-0 w-full flex flex-col items-center z-10 pt-16">
+        <div className="absolute top-0 left-0 w-full flex flex-col items-center z-10 pt-0">
           <div className="relative flex flex-col items-center">
+            {image && (
+              <div className="mb-2 w-56 h-56 flex items-center justify-center z-20">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={image} alt="Upload Preview" className="rounded-2xl object-cover w-full h-full border-4 border-black bg-white" />
+              </div>
+            )}
             <Image src="/image-Photoroom.jpg" alt="Sugar Hero" width={220} height={220} className="rounded-2xl object-cover mb-4 shadow-xl border-4 border-white" />
             <div className="rounded-[40px] bg-gradient-to-br from-[#e9e6f7] to-[#f7e9e9] shadow-2xl flex items-center justify-center w-[340px] h-[340px] md:w-[420px] md:h-[420px] mx-auto" style={{boxShadow: '0 0 120px 60px #7b8cff44'}}>
               <Image src="/file.svg" alt="Sugar Logo" width={260} height={260} className="rounded-[32px] object-contain" />
@@ -107,7 +113,8 @@ export default function Home() {
         {/* Confession Card Section */}
         <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[180px] mb-8 p-8 bg-white rounded-3xl shadow-2xl border-2 border-gray-200 backdrop-blur-md">
           <h1 className="text-4xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
-          <p className="text-center text-gray-700 mb-6 font-mono">Share your fitness confessions and guilty pleasures. No judgment, just joy!</p>
+          <p className="text-center text-gray-700 mb-6 font-mono">Share your fitness sins and guilty pleasures. 
+            No judgment, just joy!</p>
           <form onSubmit={handleSubmit} className="mb-6">
             <div className="mb-4">
               <label htmlFor="confession" className="block text-black text-lg font-semibold mb-2 font-mono">Your Confession or Guilty Pleasure</label>
@@ -131,12 +138,6 @@ export default function Home() {
               <label className="block text-black font-semibold mb-1 font-mono">Optional: Upload an image</label>
               <button type="button" onClick={() => inputImageRef.current && inputImageRef.current.click()} className="px-4 py-2 bg-black text-white font-mono rounded-lg shadow hover:bg-gray-900 transition">Bild hochladen</button>
               <input type="file" accept="image/*" ref={inputImageRef} onChange={handleImageChange} className="hidden" />
-              {image && (
-                <div className="mt-2 w-32 h-32 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={image} alt="Upload Preview" className="rounded-xl object-contain w-full h-full border-2 border-black" />
-                </div>
-              )}
             </div>
             <button type="submit" className="w-full px-6 py-3 bg-black text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-gray-900 transition font-mono">Share My Confession 🍭</button>
             {message && <p className="mt-4 text-center text-green-600 text-lg font-semibold font-mono">{message}</p>}
@@ -157,7 +158,7 @@ export default function Home() {
                 </div>
                 <p className="text-gray-800 text-lg mb-2 italic font-mono">“{c.confession}”</p>
                 <button onClick={() => handleLike(c.id)} disabled={likedIds.includes(c.id)} className={`text-blue-500 hover:text-blue-700 font-bold text-xl flex items-center gap-1 font-mono ${likedIds.includes(c.id) ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                  <span role="img" aria-label="like">❤️</span> {c.likes || 0}
+                  <span role="img" aria-label="like">❤️</span> 0
                 </button>
               </li>
             ))}
