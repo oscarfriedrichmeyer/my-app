@@ -129,44 +129,46 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/grid-bg.png')] bg-repeat bg-[#f7f7fa] overflow-x-hidden">
-        {/* Side navigation links with images - remove border/shadow/bg from images */}
-        <div className="fixed top-1/2 left-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pl-2 opacity-80 hover:opacity-100 transition-opacity">
-          <div className="flex flex-col items-center">
-            <img src="/cat-monitor.jpg" alt="Funny Jobs" className="w-28 h-28 md:w-36 md:h-36 object-contain mb-2" />
-            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="font-mono text-black text-lg md:text-2xl tracking-wider mt-2 underline underline-offset-4">JOBS AT SUGAR</a>
-          </div>
-        </div>
-        <div className="fixed top-1/2 right-0 z-40 -translate-y-1/2 flex flex-col items-center space-y-4 md:space-y-8 pr-2 opacity-80 hover:opacity-100 transition-opacity">
-          <div className="flex flex-col items-center">
-            <img src="/double-head.jpg" alt="Funny About" className="w-28 h-28 md:w-36 md:h-36 object-contain mb-2" />
-            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="font-mono text-black text-lg md:text-2xl tracking-wider mt-2 underline underline-offset-4">WTF IS SUGAR</a>
+      <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/notebook-grid.svg')] bg-repeat bg-white overflow-x-hidden" style={{ backgroundBlendMode: 'multiply' }}>
+        {/* Top navigation links next to hero */}
+        <div className="fixed top-0 left-0 w-full flex flex-row items-center justify-center z-30 pt-8 pointer-events-none select-none" style={{ height: '280px' }}>
+          <div className="flex flex-row items-center gap-8 pointer-events-auto">
+            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <img src="/cat-monitor.jpg" alt="Funny Jobs" className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1" />
+              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600">JOBS AT SUGAR</span>
+            </a>
+            <a href="https://sugar.health" target="_blank" rel="noopener noreferrer" className="group">
+              <Image
+                src="/image-Photoroom.jpg"
+                alt="Sugar Hero"
+                width={240}
+                height={240}
+                className="rounded-2xl object-cover shadow-lg border-2 border-white/80 transition-transform duration-200 group-hover:scale-110"
+                priority
+              />
+            </a>
+            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <img src="/double-head.jpg" alt="Funny About" className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1" />
+              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600">WTF IS SUGAR</span>
+            </a>
           </div>
         </div>
 
-        {/* Hero Section: Centered Logo with Glow, more whitespace */}
-        <div className="absolute top-0 left-0 w-full flex flex-col items-center z-10 pt-0">
-          <div className="relative flex flex-col items-center">
-            <Image src="/image-Photoroom.jpg" alt="Sugar Hero" width={180} height={180} className="rounded-2xl object-cover mb-4 shadow-lg border-2 border-white/80" />
-            {/* Removed the 'Sugar' label overlay */}
-          </div>
-        </div>
-
-        {/* Confession Card Section - lighter, more open */}
-        <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[160px] mb-8 p-6 bg-white/80 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
-          <h1 className="text-3xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
-          <p className="text-center text-gray-600 mb-6 font-mono text-base">
-            Share your fitness sins and guilty pleasures. We listen and we don't judge - okay mayble a little bit.<br />
-            <span className="block mt-2 text-pink-600 font-bold">The 15 most-liked submissions win a 50€ Sugar event voucher!</span>
+        {/* Confession Card Section - lighter, more open, improved spacing and visual hierarchy */}
+        <div className="relative z-30 w-full max-w-2xl mx-auto mt-[280px] md:mt-[300px] mb-12 p-8 bg-white/90 rounded-3xl shadow-2xl border border-gray-100 backdrop-blur-md transition-all overflow-y-auto" style={{ minHeight: '60vh' }}>
+          <h1 className="text-4xl font-extrabold text-center mb-3 font-sans text-black tracking-tight drop-shadow-sm">Sweet Confessions</h1>
+          <p className="text-center text-gray-600 mb-7 font-mono text-lg leading-relaxed">
+            Share your fitness sins and guilty pleasures. We listen and we don't judge <span className="opacity-60">- okay maybe a little bit.</span><br />
+            <span className="block mt-3 text-pink-600 font-bold text-base md:text-lg">The 15 most-liked submissions win a 50€ Sugar event voucher!</span>
           </p>
-          <form onSubmit={handleSubmit} className="mb-6 space-y-4">
-            {/* Get Sugar for iOS Button - above confession entry field, black button */}
-            <div className="flex justify-center">
+          <form onSubmit={handleSubmit} className="mb-8 space-y-5">
+            {/* Get Sugar for iOS Button - above confession entry field, black button, more spacing */}
+            <div className="flex justify-center mb-2">
               <a
                 href="https://apps.apple.com/de/app/sugar-do-stuff-together/id6468963352?l=en-GB"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-base px-6 py-3 font-mono bg-black text-white rounded-full shadow hover:bg-gray-900 transition"
+                className="inline-flex items-center gap-3 text-base px-7 py-3 font-mono bg-black text-white rounded-full shadow hover:bg-gray-900 transition-all border-2 border-black"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.564 13.233c-.024-2.568 2.1-3.792 2.19-3.849-1.194-1.74-3.05-1.98-3.705-2.004-1.578-.162-3.084.927-3.885.927-.798 0-2.016-.903-3.318-.879-1.71.024-3.294.99-4.176 2.511-1.788 3.099-.456 7.687 1.278 10.207.846 1.215 1.854 2.577 3.174 2.527 1.278-.048 1.755-.819 3.294-.819 1.536 0 1.962.819 3.318.795 1.38-.024 2.244-1.239 3.084-2.454.978-1.416 1.38-2.793 1.404-2.862-.03-.012-2.682-1.029-2.706-4.003zm-3.09-7.29c.705-.855 1.185-2.049 1.053-3.243-1.02.042-2.25.678-2.985 1.533-.654.75-1.23 1.962-1.014 3.12 1.14.09 2.322-.582 2.946-1.41z"/></svg>
                 <span>Get Sugar for iOS</span>
@@ -175,9 +177,9 @@ export default function Home() {
             {/* Confession entry field */}
             <div>
               <label htmlFor="confession" className="block text-black text-base font-semibold mb-1 font-mono">Your Confession or Guilty Pleasure</label>
-              <textarea id="confession" name="confession" value={form.confession} onChange={handleChange} className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white/60 text-gray-800 font-mono" placeholder="E.g. I eat chocolate after every workout..." rows={3} />
+              <textarea id="confession" name="confession" value={form.confession} onChange={handleChange} className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-200 bg-white/70 text-gray-800 font-mono text-base transition-all" placeholder="E.g. I eat chocolate after every workout..." rows={3} />
             </div>
-            {/* Image upload option below confession field */}
+            {/* Image upload option below confession field, more spacing */}
             <div className="flex flex-col items-center mb-2">
               <label htmlFor="image-upload" className="block text-gray-700 font-mono text-sm mb-1">Optional: Add an image</label>
               <input
@@ -189,38 +191,38 @@ export default function Home() {
                 className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
               />
             </div>
-            {/* Login with Sugar Button and hint - outlined black button */}
-            <div className="flex flex-col items-center gap-2">
+            {/* Login with Sugar Button and hint - outlined black button, more margin */}
+            <div className="flex flex-col items-center gap-2 mt-2 mb-2">
               <a
                 href="/login"
-                className="inline-flex items-center gap-2 px-5 py-2 border-2 border-black text-black font-bold font-mono text-base rounded-full shadow-none bg-transparent hover:bg-black hover:text-white transition"
+                className="inline-flex items-center gap-2 px-5 py-2 border-2 border-black text-black font-bold font-mono text-base rounded-full shadow-none bg-transparent hover:bg-black hover:text-white transition-all"
               >
                 <span role="img" aria-label="candy">🍬</span>
                 <span>Login with Sugar</span>
               </a>
               <p className="text-center text-gray-600 font-mono text-sm max-w-xs">
-                <span className="font-bold text-pink-600">You need to login with Sugar to participate in the competition.</span>
+                <span className="font-bold text-pink-600">Login with Sugar to participate in the competition.</span>
               </p>
             </div>
-            {/* Name, Age, City for anonymous confessions only */}
+            {/* Name, Age, City for anonymous confessions only, more spacing */}
             <div className="mt-2 mb-2">
-              <p className="text-center text-gray-500 font-mono text-xs mb-2">If you want to confess <span className="font-bold">without logging in with Sugar</span>, enter your name, age, and city below. Otherwise, your submission will link to your profile</p>
+              <p className="text-center text-gray-500 font-mono text-xs mb-2">If you want to confess <span className="font-bold">without logging in with Sugar</span>, enter your info below.</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
                   <label htmlFor="name" className="block text-black font-semibold mb-1 font-mono text-sm">Name</label>
-                  <input type="text" id="name" name="name" value={form.name} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white/60 text-gray-800 font-mono text-sm" placeholder="Your name" />
+                  <input type="text" id="name" name="name" value={form.name} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-200 bg-white/70 text-gray-800 font-mono text-sm transition-all" placeholder="Your name" />
                 </div>
                 <div>
                   <label htmlFor="age" className="block text-black font-semibold mb-1 font-mono text-sm">Age</label>
-                  <input type="number" id="age" name="age" value={form.age} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white/60 text-gray-800 font-mono text-sm" placeholder="Your age" />
+                  <input type="number" id="age" name="age" value={form.age} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-200 bg-white/70 text-gray-800 font-mono text-sm transition-all" placeholder="Your age" />
                 </div>
                 <div>
                   <label htmlFor="city" className="block text-black font-semibold mb-1 font-mono text-sm">City</label>
-                  <input type="text" id="city" name="city" value={form.city} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white/60 text-gray-800 font-mono text-sm" placeholder="Your city" />
+                  <input type="text" id="city" name="city" value={form.city} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-200 bg-white/70 text-gray-800 font-mono text-sm transition-all" placeholder="Your city" />
                 </div>
               </div>
             </div>
-            <button type="submit" className="w-full px-6 py-3 bg-black text-white text-lg font-bold rounded-full shadow-none hover:bg-gray-900 transition font-mono mt-2">Share My Confession 🍭</button>
+            <button type="submit" className="w-full px-6 py-3 bg-black text-white text-lg font-bold rounded-full shadow hover:bg-gray-900 transition-all font-mono mt-2">Share My Confession 🍭</button>
             {message && <p className="mt-4 text-center text-green-600 text-base font-semibold font-mono">{message}</p>}
           </form>
 
