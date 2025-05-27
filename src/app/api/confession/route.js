@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  connectionString: process.env.DB_URL,
+  connectionString: process.env.DATABASE_URL, // FIX: Use DATABASE_URL for Vercel/Neon compatibility
 });
 
 export async function GET() {

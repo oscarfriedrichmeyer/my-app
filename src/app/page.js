@@ -50,19 +50,34 @@ export default function Home() {
     }
     // Prepare submission object
     const submission = { ...form };
-    if (image) submission.image = image;
-    const res = await fetch('/api/confession', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(submission),
-    });
-    if (res.ok) {
-      setMessage('Thank you for your confession!');
-      setForm({ name: '', age: '', city: '', confession: '' });
-      setImage(null);
-      fetchConfessions();
-    } else {
-      setMessage('Failed to submit confession.');
+    // If image is present, check if it's too large for Vercel serverless (limit ~4MB)
+    if (image) {
+      // Estimate base64 size in bytes
+      const base64Length = image.length - (image.indexOf(',') + 1);
+      const sizeInBytes = Math.floor(base64Length * 3 / 4);
+      if (sizeInBytes > 3500000) { // ~3.5MB for safety
+        setMessage('Image is too large. Please upload an image smaller than 3MB.');
+        return;
+      }
+      submission.image = image;
+    }
+    try {
+      const res = await fetch('/api/confession', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submission),
+      });
+      if (res.ok) {
+        setMessage('Thank you for your confession!');
+        setForm({ name: '', age: '', city: '', confession: '' });
+        setImage(null);
+        fetchConfessions();
+      } else {
+        const err = await res.text();
+        setMessage('Failed to submit confession.' + (err ? ' ' + err : ''));
+      }
+    } catch (err) {
+      setMessage('Submission failed. Please try again later.');
     }
   };
 
