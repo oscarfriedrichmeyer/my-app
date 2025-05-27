@@ -156,7 +156,7 @@ export default function Home() {
         <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[160px] mb-8 p-6 bg-white/80 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
           <h1 className="text-3xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
           <p className="text-center text-gray-600 mb-6 font-mono text-base">
-            Share your fitness sins and guilty pleasures. We don't judge - okay mayble a little bit<br />
+            Share your fitness sins and guilty pleasures. We listen and we don't judge - okay mayble a little bit.<br />
             <span className="block mt-2 text-pink-600 font-bold">The 15 most-liked submissions win a 50€ Sugar event voucher!</span>
           </p>
           <form onSubmit={handleSubmit} className="mb-6 space-y-4">
@@ -272,8 +272,8 @@ export default function Home() {
                       <img
                         src={c.image}
                         alt="Confession Upload"
-                        className="rounded-xl object-cover w-72 h-72 md:w-96 md:h-96 border-2 border-pink-200 bg-white/70 shadow hover:scale-105 hover:border-pink-400 cursor-pointer transition-transform"
-                        style={{ maxHeight: '384px', maxWidth: '384px', aspectRatio: '1/1', objectFit: 'cover' }}
+                        className="rounded-xl object-cover w-56 h-56 md:w-72 md:h-72 border-2 border-pink-200 bg-white/70 shadow hover:scale-105 hover:border-pink-400 cursor-pointer transition-transform"
+                        style={{ maxHeight: '288px', maxWidth: '288px', aspectRatio: '1/1', objectFit: 'cover' }}
                       />
                     </a>
                   </div>
