@@ -18,6 +18,10 @@ export default function Home() {
   const [image, setImage] = useState(null);
   const inputImageRef = useRef(null);
 
+  // Admin state
+  const [admin, setAdmin] = useState(false);
+  const [adminLogin, setAdminLogin] = useState({ user: '', pass: '' });
+
   useEffect(() => {
     fetchConfessions();
   }, []);
@@ -84,6 +88,27 @@ export default function Home() {
     }
   };
 
+  // Admin login handler
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    if (adminLogin.user === 'Oscar' && adminLogin.pass === 'Admin123') {
+      setAdmin(true);
+      setAdminLogin({ user: '', pass: '' });
+    } else {
+      setAdmin(false);
+      setAdminLogin({ user: '', pass: '' });
+    }
+  };
+
+  // Admin delete handler
+  const handleDelete = async (id) => {
+    if (!admin) return;
+    await fetch(`/api/confession?id=${id}`, {
+      method: 'DELETE',
+    });
+    fetchConfessions();
+  };
+
   let sortedConfessions = [...confessions];
   if (filter === 'most-liked') {
     sortedConfessions.sort((a, b) => (b.likes || 0) - (a.likes || 0));
@@ -131,8 +156,8 @@ export default function Home() {
         <div className="relative z-20 w-full max-w-2xl mx-auto mt-[120px] md:mt-[160px] mb-8 p-6 bg-white/80 rounded-3xl shadow-lg border border-gray-100 backdrop-blur-sm">
           <h1 className="text-3xl font-extrabold text-center mb-2 font-sans text-black">Sweet Confessions</h1>
           <p className="text-center text-gray-600 mb-6 font-mono text-base">
-            Share your fitness sins and guilty pleasures. No judgment, just joy!<br />
-            <span className="block mt-2 text-pink-600 font-bold">Top 15 most-liked submissions win a 50€ Sugar event voucher!</span>
+            Share your fitness sins and guilty pleasures. We don't judge - okay mayble a little bit<br />
+            <span className="block mt-2 text-pink-600 font-bold">The 15 most-liked submissions win a 50€ Sugar event voucher!</span>
           </p>
           <form onSubmit={handleSubmit} className="mb-6 space-y-4">
             {/* Get Sugar for iOS Button - above confession entry field, black button */}
@@ -235,7 +260,7 @@ export default function Home() {
           {sortedConfessions.length === 0 && !loading && <p className="text-blue-400 text-center font-mono">No confessions yet. Be the first to sweeten the feed!</p>}
           <ul className="space-y-5 max-h-96 overflow-y-auto">
             {sortedConfessions.map((c, idx) => (
-              <li key={c.id || idx} className="bg-white/70 p-4 rounded-2xl shadow border border-gray-100">
+              <li key={c.id || idx} className="bg-white/70 p-4 rounded-2xl shadow border border-gray-100 relative">
                 <div className="flex justify-between items-center mb-1">
                   <span className="font-semibold text-black font-mono text-sm">{c.name || 'Anonymous'}{c.age ? `, ${c.age}` : ''}{c.city ? `, ${c.city}` : ''}</span>
                   <span className="text-xs text-gray-400 font-mono">{c.date ? new Date(c.date).toLocaleDateString() : ''}</span>
@@ -247,18 +272,48 @@ export default function Home() {
                       <img
                         src={c.image}
                         alt="Confession Upload"
-                        className="rounded-xl object-cover w-40 h-40 border border-pink-200 bg-white/70 shadow hover:scale-105 hover:border-pink-400 cursor-pointer transition-transform"
-                        style={{ maxHeight: '160px', maxWidth: '160px' }}
+                        className="rounded-xl object-cover w-72 h-72 md:w-96 md:h-96 border-2 border-pink-200 bg-white/70 shadow hover:scale-105 hover:border-pink-400 cursor-pointer transition-transform"
+                        style={{ maxHeight: '384px', maxWidth: '384px', aspectRatio: '1/1', objectFit: 'cover' }}
                       />
                     </a>
                   </div>
                 )}
                 <p className="text-gray-800 text-base mb-2 italic font-mono">“{c.confession}”</p>
                 <button onClick={() => handleLike(c.id)} disabled={likedIds.includes(c.id)} className={`text-pink-500 hover:text-pink-700 font-bold text-lg flex items-center gap-1 font-mono ${likedIds.includes(c.id) ? 'opacity-50 cursor-not-allowed' : ''}`}>❤️ {c.likes || 0}</button>
+                {admin && (
+                  <button
+                    onClick={() => handleDelete(c.id)}
+                    className="absolute top-2 right-2 text-xs text-red-400 hover:text-red-700 font-mono bg-white/80 rounded px-2 py-0.5 border border-red-100 shadow-sm"
+                    title="Delete confession"
+                  >Delete</button>
+                )}
               </li>
             ))}
           </ul>
         </div>
+
+        {/* Subtle admin login form (bottom right, tiny, only if not logged in as admin) */}
+        {!admin && (
+          <form onSubmit={handleAdminLogin} className="fixed bottom-2 right-2 z-50 flex flex-col items-end opacity-30 hover:opacity-100 transition-opacity">
+            <input
+              type="text"
+              placeholder="user"
+              value={adminLogin.user}
+              onChange={e => setAdminLogin({ ...adminLogin, user: e.target.value })}
+              className="w-16 text-xs px-1 py-0.5 rounded border border-gray-200 mb-0.5 bg-white/80 font-mono"
+              autoComplete="off"
+            />
+            <input
+              type="password"
+              placeholder="pass"
+              value={adminLogin.pass}
+              onChange={e => setAdminLogin({ ...adminLogin, pass: e.target.value })}
+              className="w-16 text-xs px-1 py-0.5 rounded border border-gray-200 mb-0.5 bg-white/80 font-mono"
+              autoComplete="off"
+            />
+            <button type="submit" className="text-[10px] px-2 py-0.5 rounded bg-gray-200 text-gray-600 font-mono">login</button>
+          </form>
+        )}
       </div>
     </>
   );

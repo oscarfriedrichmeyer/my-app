@@ -37,3 +37,15 @@ export async function PATCH(req) {
     return NextResponse.json({ error: 'Failed to like confession.' }, { status: 500 });
   }
 }
+
+export async function DELETE(req) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
+  try {
+    await pool.query('DELETE FROM confessions WHERE id = $1', [id]);
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    return NextResponse.json({ error: 'Failed to delete confession.' }, { status: 500 });
+  }
+}
