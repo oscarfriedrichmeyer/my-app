@@ -146,25 +146,25 @@ export default function Home() {
     <>
       <div className="relative min-h-screen flex flex-col items-center justify-start bg-[url('/notebook-grid.svg')] bg-repeat bg-white overflow-x-hidden" style={{ backgroundBlendMode: 'multiply' }}>
         {/* Top navigation links next to hero */}
-        <div className="fixed top-0 left-0 w-full flex flex-row items-center justify-center z-30 pt-8 pointer-events-none select-none" style={{ height: '280px' }}>
-          <div className="flex flex-row items-center gap-8 pointer-events-auto">
-            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
-              <img src="/cat-monitor.jpg" alt="Funny Jobs" className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1" />
-              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600">JOBS AT SUGAR</span>
+        <div className="fixed top-0 left-0 w-full flex flex-row items-center justify-center z-30 pt-4 md:pt-8 pointer-events-none select-none" style={{ height: '220px' }}>
+          <div className="flex flex-row items-center gap-3 md:gap-8 pointer-events-auto px-2 md:px-0 w-full max-w-2xl justify-between md:justify-center">
+            <a href="https://sugar.health/jobs" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group min-w-0">
+              <img src="/cat-monitor.jpg" alt="Funny Jobs" className="w-16 h-16 md:w-24 md:h-24 object-contain mb-1" />
+              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600 text-center leading-tight">JOBS AT SUGAR</span>
             </a>
-            <a href="https://sugar.health" target="_blank" rel="noopener noreferrer" className="group">
+            <a href="https://sugar.health" target="_blank" rel="noopener noreferrer" className="group min-w-0">
               <Image
                 src="/image-Photoroom.jpg"
                 alt="Sugar Hero"
                 width={240}
                 height={240}
-                className="rounded-2xl object-cover shadow-lg border-2 border-white/80 transition-transform duration-200 group-hover:scale-110"
+                className="rounded-2xl object-cover shadow-lg border-2 border-white/80 transition-transform duration-200 group-hover:scale-110 mx-auto"
                 priority
               />
             </a>
-            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
-              <img src="/double-head.jpg" alt="Funny About" className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1" />
-              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600">WTF IS SUGAR</span>
+            <a href="https://sugar.health/about-us" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group min-w-0">
+              <img src="/double-head.jpg" alt="Funny About" className="w-16 h-16 md:w-24 md:h-24 object-contain mb-1" />
+              <span className="font-mono text-black text-xs md:text-base tracking-wider underline underline-offset-4 group-hover:text-pink-600 text-center leading-tight">WTF IS SUGAR</span>
             </a>
           </div>
         </div>
@@ -174,7 +174,7 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-center mb-3 font-sans text-black tracking-tight drop-shadow-sm">Sweet Confessions</h1>
           <p className="text-center text-gray-600 mb-7 font-mono text-lg leading-relaxed">
             Share your fitness sins and guilty pleasures. We listen and we don't judge <span className="opacity-60">- okay maybe a little bit.</span><br />
-            <span className="block mt-3 text-pink-600 font-bold text-base md:text-lg">The 15 most-liked submissions win a 50€ Sugar event voucher!</span>
+            <span className="block mt-3 text-pink-600 font-bold text-base md:text-lg">The 10 confessions with the most likes each win 50€ Sugar event vouchers to use on yourselves and friends!</span>
           </p>
           <form onSubmit={handleSubmit} className="mb-8 space-y-5">
             {/* Get Sugar for iOS Button - above confession entry field, black button, more spacing */}
